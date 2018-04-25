@@ -11,8 +11,6 @@ let mapDispatchToProps = (dispatch) => {
   return {dispatch: dispatch}
 };
 
-//props.match.params.username
-
 class CategoryNameDumb extends Component {
 
     render() {

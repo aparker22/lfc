@@ -32,7 +32,6 @@ class CartDumb extends Component {
     }
     
     let deleteFromCart = (event) => {
-        console.log(event.target.value)
         return this.props.dispatch(deleteItemFromCart({id:event.target.value}));
     }
 

@@ -11,7 +11,6 @@ let mapDispatchToProps = (dispatch) => {
 }
 
 let FindLoggedInUser = (user) => {
-    console.log(user.user)
     if (user.user === undefined) {
         return <Link to="/Login">Login</Link>
     } else {
