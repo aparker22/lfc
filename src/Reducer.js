@@ -4,7 +4,7 @@ import products from './json/products.json';
 import users from './json/users.json';
 
 
-const initialState = {categoryList: categories, userList: users, productList: products, cartList: []};  
+const initialState = {categoryList: categories, userList: users, productList: products, cartList: [], loggedInUser:{}};  
 
 let fallbackReducer = state => state; 
 

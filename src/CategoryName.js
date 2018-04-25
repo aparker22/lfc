@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {addItemToCart} from './actions';
+import {Link} from 'react-router-dom';
 
 let mapStateToProps = (state) => {
     return {categoryList: state.categoryList, productList: state.productList}
@@ -47,7 +48,7 @@ class CategoryNameDumb extends Component {
 
         return <div className="productList">{
                 specificProductList.map((product) => <ul key={product.id}>
-                    <li>{product.name}</li>
+                    <li><Link to={`/product/${product.name}`}>{product.name}</Link></li>
                     <li>${product.price}</li>
                     <li><button onClick={addtoCart} className="cartButton" value={product.id}>Add To Cart</button></li>
                 </ul>)

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { deleteItemFromCart } from './actions';
+import { Link } from 'react-router-dom';
 
 let mapStateToProps = (state) => {
     return {productList: state.productList, cartList: state.cartList}
@@ -31,15 +32,16 @@ class CartDumb extends Component {
     }
     
     let deleteFromCart = (event) => {
+        console.log(event.target.value)
         return this.props.dispatch(deleteItemFromCart({id:event.target.value}));
     }
 
     let displayCartProducts = findCartProducts(cartList, productList);
 
-        return <div>
-            <div className="productList">{
+        return <div className="cartList">
+            <div>{
             displayCartProducts.displayList.map((product) => <ul key={product.id}>
-                <li>{product.name}</li>
+                <li><Link to={`/product/${product.name}`}>{product.name}</Link></li>
                 <li>${product.price}</li>
                 <li><button onClick={deleteFromCart} className="cartButton" value={product.id}>Delete from Cart</button></li>
             </ul>)

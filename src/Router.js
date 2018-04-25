@@ -4,6 +4,7 @@ import Homepage from './Homepage';
 import Categories from './Categories';
 import CategoryName from './CategoryName';
 import Product from './Product';
+import ProductName from './ProductName';
 import Cart from './Cart';
 import Login from './Login';
 import Header from './Header';
@@ -21,7 +22,8 @@ let Router = () =>
                 <Route path="/" exact component={Homepage} />
                 <Route path = "/categories" exact component={Categories} />
                 <Route path = "/categories/:categoryname" component={CategoryName} />
-                <Route path = "/product" component={Product} />
+                <Route path = "/product" exact component={Product} />
+                <Route path = "/product/:productname" component={ProductName} />
                 <Route path = "/cart" component={Cart} />
                 <Route path = "/login" component={Login} />
                 <Route path = "/profile" component={Profile} />

@@ -16,9 +16,17 @@ let deleteItemFromCartAction = (state, action) => {
 }
 deleteItemFromCart.toString = () => DELETE_ITEM_FROM_CART;
 
+const LOGIN_USER = "LOGIN_USER";
+export let loginUser = (user) => ({type: LOGIN_USER, payload: user});
+let loginUserAction = (state, action) => {
+    return ({...state, loggedInUser: action.payload});
+}
+loginUser.toString = () => LOGIN_USER;
+
 let reducers = {
     [addItemToCart]:addItemToCartAction,
-    [deleteItemFromCart]:deleteItemFromCartAction
+    [deleteItemFromCart]:deleteItemFromCartAction,
+    [loginUser]:loginUserAction
 }
 
 export default reducers;
