@@ -13,12 +13,11 @@ let mapDispatchToProps = (dispatch) => {
 class ProductNameDumb extends Component {
 
     render() {
-        let { productList } = this.props;
 
-        let findProduct = (productList) => {
+        let findProduct = () => {
             let thisProduct = {};
-            productList.map( (product) => {
-                if (product.name === this.props.match.params.productname) {
+            this.props.productList.map( (product) => {
+                if (product.title === this.props.match.params.productname) {
                     thisProduct = product;
                 }
                 return thisProduct;
@@ -26,21 +25,26 @@ class ProductNameDumb extends Component {
             return thisProduct;
         }
 
-        let product = findProduct(productList);
-
         let addtoCart = (event) => {
             return this.props.dispatch(addItemToCart({id:event.target.value}));
         }
 
-        return <div className="displayProduct">
+        let DisplayProducts = () => {
+            let product = findProduct();
+            return <div className="displayProduct">
                     <ul key={product.id}>
-                        <li>{product.name}</li>
+                        <li>{product.title}</li>
+                        <li>{product.description}</li>
                         <li>${product.price}</li>
                     </ul>
                     <ul>
+                        <li><img src={product.images[0].url} alt={product.images[0].name}></img></li>
                         <li><button onClick={addtoCart} className="displayProductButton" value={product.id}>Add To Cart</button></li>
                     </ul>
             </div>
+        }
+
+        return <DisplayProducts />
     }
 }
 

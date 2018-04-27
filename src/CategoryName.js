@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {addItemToCart} from './actions';
-import {Link} from 'react-router-dom';
+import {updateCategories, updateProducts} from './actions';
+import { fetchCategoryList, fetchProductList, DisplayProduct, updateUsersCart } from './helper';
+
 
 let mapStateToProps = (state) => {
-    return {categoryList: state.categoryList, productList: state.productList}
+    return {categoryList: state.categoryList, productList: state.productList, jwt: state.jwt}
 };  
 
 let mapDispatchToProps = (dispatch) => {
@@ -13,13 +14,22 @@ let mapDispatchToProps = (dispatch) => {
 
 class CategoryNameDumb extends Component {
 
+    componentDidMount() {
+        fetchCategoryList()
+        .then( (res) => {
+            this.props.dispatch(updateCategories(res))});
+        fetchProductList()
+        .then( (res) => {
+            this.props.dispatch(updateProducts(res))})
+    }
+
     render() {
         let { categoryList, productList } = this.props;
 
         let findCategoryID = (categoryList) => {
             let categoryID= '';
             categoryList.map( (category) => {
-                if (category.name === this.props.match.params.categoryname)
+                if (category.title === this.props.match.params.categoryname)
                     categoryID= category.id;
                     return categoryID;
                 })
@@ -31,7 +41,7 @@ class CategoryNameDumb extends Component {
         let findProductList = (categoryID, productList) => {
             let specificProductList = [];
             productList.map( (product) => {
-                if (product.categoryId === categoryID) 
+                if (product.category.id === categoryID) 
                     specificProductList.push(product);
                     return specificProductList;
             })
@@ -41,15 +51,12 @@ class CategoryNameDumb extends Component {
         let specificProductList = findProductList(categoryID, productList);
 
         let addtoCart = (event) => {
-            return this.props.dispatch(addItemToCart({id:event.target.value}));
+            event.preventDefault();
+            updateUsersCart(event, this.props.jwt)
         }
 
         return <div className="productList">{
-                specificProductList.map((product) => <ul key={product.id}>
-                    <li><Link to={`/product/${product.name}`}>{product.name}</Link></li>
-                    <li>${product.price}</li>
-                    <li><button onClick={addtoCart} className="cartButton" value={product.id}>Add To Cart</button></li>
-                </ul>)
+                specificProductList.map((product) => <DisplayProduct key={product.id} addtoCart={addtoCart} product={product} />)
             }</div>
     }
 }

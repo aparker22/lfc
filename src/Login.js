@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {loginUser} from './actions';
+import {loginUser, updateJWT} from './actions';
+import {loginWithUserData} from './helper';
 
 
 let mapStateToProps = (state) => {
@@ -18,20 +19,24 @@ class LoginScreenDumb extends Component {
     render() {
 
         let toggleForm = (event) => {
-            console.log(event.target);
         };
 
         let submitNewUserInformation = (event) => {
             event.preventDefault();
-            console.log(event.target);
         };
 
         let submitUserLoginInformation = (event) => {
             event.preventDefault();
             let username = event.target.username.value;
+            let password = event.target.password.value;
             this.props.dispatch(loginUser({username}));
             event.target.reset();
-            this.props.history.push(`/`)
+            let JSONLoginInfo = {"identifier":username, "password":password}
+            loginWithUserData(JSON.stringify(JSONLoginInfo))
+            .then((res) => {
+                this.props.dispatch(updateJWT(res))
+            })
+            .then(this.props.history.push(`/`))
         };
 
         return <div className="login-page">

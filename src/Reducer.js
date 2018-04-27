@@ -4,7 +4,7 @@ import products from './json/products.json';
 import users from './json/users.json';
 
 
-const initialState = {categoryList: categories, userList: users, productList: products, cartList: [], loggedInUser:{}};  
+const initialState = {categoryList: categories, userList: users, productList: products, cartList: [], jwt: JSON.parse(localStorage.getItem('jwt'))};  
 
 let fallbackReducer = state => state; 
 

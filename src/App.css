@@ -115,15 +115,9 @@ html, body {
   width: 100%;
   height: 100%;
   padding-top: 10%;
-  background: linear-gradient(rgba(255, 255, 255, 0.329), rgba(255, 255, 255, 0.329)), url("images/field.jpeg");
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 
 .displayProduct {
-  background: linear-gradient(rgba(255, 255, 255, 0.329), rgba(255, 255, 255, 0.329)), url("images/eggs.jpeg");
-  background-size: cover;
-  background-repeat: no-repeat;
   display: flex;
   flex-direction: row;
 }
@@ -223,9 +217,6 @@ html, body {
   width: 100%;
   height: 100%;
   padding-top: 10%;
-  background: linear-gradient(rgba(255, 255, 255, 0.329), rgba(255, 255, 255, 0.329)), url("images/cartbackground.jpeg");
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 
 

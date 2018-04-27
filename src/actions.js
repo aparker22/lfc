@@ -1,5 +1,5 @@
 const ADD_ITEM_TO_CART = "ADD_ITEM_TO_CART";
-export let addItemToCart = (productId) => ({type: ADD_ITEM_TO_CART, payload: productId});
+export let addItemToCart = (list) => ({type: ADD_ITEM_TO_CART, payload: list});
 let addItemToCartAction = (state, action) => {
     let newCartList = state.cartList
     newCartList.push(action.payload);
@@ -23,10 +23,34 @@ let loginUserAction = (state, action) => {
 }
 loginUser.toString = () => LOGIN_USER;
 
+const UPDATE_JWT = "UPDATE_JWT";
+export let updateJWT = (token) => ({type: UPDATE_JWT, payload: token});
+let updateJWTAction = (state, action) => {
+    return ({...state, jwt: action.payload});
+}
+updateJWT.toString = () => UPDATE_JWT;
+
+const UPDATE_CATEGORIES = "UPDATE_CATEGORIES";
+export let updateCategories = (data) => ({type: UPDATE_CATEGORIES, payload: data});
+let updateCategoriesAction = (state, action) => {
+    return ({...state,  categoryList : action.payload});
+}
+updateCategories.toString = () => UPDATE_CATEGORIES;
+
+const UPDATE_PRODUCTS= "UPDATE_PRODUCTS";
+export let updateProducts= (data) => ({type: UPDATE_PRODUCTS, payload: data});
+let updateProductsAction = (state, action) => {
+    return ({...state,  productList : action.payload});
+}
+updateProducts.toString = () => UPDATE_PRODUCTS;
+
 let reducers = {
     [addItemToCart]:addItemToCartAction,
     [deleteItemFromCart]:deleteItemFromCartAction,
-    [loginUser]:loginUserAction
+    [loginUser]:loginUserAction,
+    [updateCategories]: updateCategoriesAction,
+    [updateProducts]: updateProductsAction,
+    [updateJWT]: updateJWTAction,
 }
 
 export default reducers;

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 
 let mapStateToProps = (state) => {
-    return {loggedInUser: state.loggedInUser}
+    return {loggedInUser: state.loggedInUser, jwt: state.jwt}
 };  
 
 let mapDispatchToProps = (dispatch) => {
@@ -14,7 +14,7 @@ class ProfileScreenDumb extends Component {
 
     render() {
         return <div className="profileScreen">
-            <h1>Welcome to {this.props.loggedInUser.username}'s Profile Page!!!</h1>
+            <h1>Welcome to {this.props.jwt.user.username}'s Profile Page!!!</h1>
         </div>
     }
 }

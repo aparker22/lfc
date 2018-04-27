@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import logo from './logo.png';
+import {updateCategories} from './actions';
+import { fetchCategoryList } from './helper';
 
 
 let mapStateToProps = (state) => {
@@ -14,13 +16,19 @@ let mapDispatchToProps = (dispatch) => {
 
 class DumbSidebar extends Component {
 
+    componentDidMount() {
+        fetchCategoryList()
+        .then( (res) => {
+            this.props.dispatch(updateCategories(res))})
+        }
+
     render() {
         let { categoryList } = this.props;
         
         return <div className="sidebar">
-            <img src={logo} alt='logo' />
+            <Link to={'/'}><img src={logo} alt='logo' /></Link>
             <div className="sidebarList">
-            {categoryList.map( category => <Link to={`/categories/${category.name}`} key={category.id}>{category.name}</Link>)}
+            {categoryList.map( category => <Link to={`/categories/${category.title}`} key={category.id}>{category.title}</Link>)}
             </div>
         </div>
     }
